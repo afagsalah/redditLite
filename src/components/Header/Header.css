@@ -1,0 +1,51 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 30px;
+
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.search {
+  display: flex;
+  width: 40%;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 20px 0 0 20px;
+}
+
+.search button {
+  padding: 10px 15px;
+
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 20px 20px 0;
+
+  cursor: pointer;
+}
+
+.theme-button {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
