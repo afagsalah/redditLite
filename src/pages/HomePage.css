@@ -1,0 +1,47 @@
+.home-page {
+  flex: 1;
+  padding: 32px;
+  background-color: #f6f7f8;
+  min-height: calc(100vh - 70px);
+}
+
+.feed-heading h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.feed-heading p {
+  margin: 5px 0 25px;
+  color: #666;
+}
+
+.sort-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.sort-button {
+  padding: 10px 22px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+
+  background-color: white;
+
+  font-size: 15px;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.sort-button:hover {
+  background-color: #f1f1f1;
+}
+
+.sort-button.active {
+  background-color: #ffe8df;
+  color: #ff4500;
+  border-color: #ffe8df;
+  font-weight: 600;
+}
