@@ -1,5 +1,6 @@
 .post-card {
   width: 100%;
+  max-width: 100%;
   padding: 20px;
 
   background-color: #ffffff;
@@ -103,4 +104,26 @@
 
 .action-button:hover {
   background-color: #ebebeb;
+}
+@media (max-width: 600px) {
+  .post-card {
+    padding: 14px;
+  }
+
+  .post-image {
+    height: 220px;
+  }
+
+  .post-title {
+    font-size: 18px;
+  }
+
+  .post-actions {
+    gap: 6px;
+  }
+
+  .action-button {
+    padding: 8px;
+    font-size: 13px;
+  }
 }
