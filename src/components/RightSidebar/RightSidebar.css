@@ -1,19 +1,19 @@
 .right-sidebar {
-  padding: 25px 20px;
+  padding: 30px 20px 30px 0;
 }
 
 .right-card {
-  background-color: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 14px;
-
+  margin-bottom: 22px;
   padding: 20px;
-  margin-bottom: 20px;
+
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
 }
 
 .right-card h3 {
-  margin: 0 0 18px;
-  font-size: 16px;
+  margin: 0 0 16px;
+  font-size: 18px;
 }
 
 .trending-item {
@@ -21,7 +21,7 @@
   align-items: center;
   gap: 12px;
 
-  padding: 10px 0;
+  padding: 14px 0;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -29,21 +29,66 @@
   border-bottom: none;
 }
 
-.trending-item span {
-  color: #888;
+.trend-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background-color: #f3f4f6;
+  border-radius: 50%;
+
   font-size: 14px;
-  font-weight: 600;
 }
 
-.trending-item p {
-  margin: 0;
-  font-weight: 500;
+.trend-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.about-text {
-  margin: 0;
+.trend-info strong {
+  font-size: 15px;
+}
+
+.trend-info span {
+  color: #777;
+  font-size: 13px;
+}
+
+.trend-icon {
+  font-size: 16px;
+}
+
+.about-card p {
+  margin: 0 0 18px;
 
   color: #666;
   font-size: 14px;
   line-height: 1.6;
+}
+
+.github-button {
+  display: block;
+
+  padding: 11px;
+
+  background-color: #ff4500;
+  border-radius: 8px;
+
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+
+  transition: background-color 0.2s ease;
+}
+
+.github-button:hover {
+  background-color: #e63e00;
 }
