@@ -1,5 +1,5 @@
 import "./HomePage.css";
-import Post from "../components/Post/Post";
+import PostList from "../components/PostList/PostList";
 
 function HomePage() {
   return (
@@ -14,20 +14,7 @@ function HomePage() {
         <button className="sort-button">✨ New</button>
         <button className="sort-button">📊 Top</button>
       </div>
-      <Post
-        subreddit="C#"
-        time="2 hours ago"
-        title="React introduces several new features"
-        score="1.2k"
-        comments="184"
-      />
-      <Post
-        subreddit="science"
-        time="4 hours ago"
-        title="Scientists announce a fascinating new discovery"
-        score="853"
-        comments="76"
-      />gi
+      <PostList />
     </main>
   );
 }
