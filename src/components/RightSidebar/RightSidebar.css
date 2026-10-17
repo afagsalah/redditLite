@@ -1,0 +1,49 @@
+.right-sidebar {
+  padding: 25px 20px;
+}
+
+.right-card {
+  background-color: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.right-card h3 {
+  margin: 0 0 18px;
+  font-size: 16px;
+}
+
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.trending-item:last-child {
+  border-bottom: none;
+}
+
+.trending-item span {
+  color: #888;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.trending-item p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.about-text {
+  margin: 0;
+
+  color: #666;
+  font-size: 14px;
+  line-height: 1.6;
+}
