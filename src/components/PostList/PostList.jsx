@@ -21,9 +21,7 @@ function PostList() {
 
   // 1. Filter posts based on the search term
   const filteredPosts = posts.filter((post) =>
-    post.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   // 2. Sort the filtered posts
@@ -39,11 +37,7 @@ function PostList() {
     }
 
     // HOT: combination of score and comments
-    return (
-      b.score +
-      b.comments -
-      (a.score + a.comments)
-    );
+    return b.score + b.comments - (a.score + a.comments);
   });
 
   // Loading state
@@ -67,6 +61,7 @@ function PostList() {
       {sortedPosts.map((post) => (
         <Post
           key={post.id}
+          id={post.id}
           subreddit={post.subreddit}
           time={post.time}
           title={post.title}
