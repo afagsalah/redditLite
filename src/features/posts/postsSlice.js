@@ -13,9 +13,9 @@ const initialState = {
   posts: postsData,
   loading: false,
   error: null,
-  selectedSubreddit: "popular",
+  selectedSubreddit: "home",
+  searchTerm: "",
 };
-
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -23,6 +23,9 @@ const postsSlice = createSlice({
   reducers: {
     setSelectedSubreddit: (state, action) => {
       state.selectedSubreddit = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
     },
   },
 
@@ -42,11 +45,13 @@ const postsSlice = createSlice({
       });
   },
 });
-export const { setSelectedSubreddit } = postsSlice.actions;
+export const { setSelectedSubreddit, setSearchTerm } = postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
 export const selectPostsLoading = (state) => state.posts.loading;
 export const selectPostsError = (state) => state.posts.error;
 export const selectSelectedSubreddit = (state) => state.posts.selectedSubreddit;
+//search
+export const selectSearchTerm = (state) => state.posts.searchTerm;
 
 export default postsSlice.reducer;

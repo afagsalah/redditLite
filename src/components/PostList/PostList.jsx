@@ -4,6 +4,7 @@ import {
   selectPosts,
   selectPostsLoading,
   selectPostsError,
+  selectSearchTerm,
 } from "../../features/posts/postsSlice";
 
 import Post from "../Post/Post";
@@ -13,6 +14,11 @@ function PostList() {
   const posts = useSelector(selectPosts);
   const loading = useSelector(selectPostsLoading);
   const error = useSelector(selectPostsError);
+  //search
+  const searchTerm = useSelector(selectSearchTerm);
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   if (loading) {
     return <p>Loading posts...</p>;
@@ -24,7 +30,7 @@ function PostList() {
 
   return (
     <div className="post-list">
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <Post
           key={post.id}
           subreddit={post.subreddit}
