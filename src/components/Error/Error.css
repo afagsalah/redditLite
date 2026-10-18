@@ -1,0 +1,45 @@
+.error-container {
+  width: 100%;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.error-icon {
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+.error-container h2 {
+  margin: 0 0 10px;
+  color: #1c1c1c;
+  font-size: 22px;
+}
+
+.error-container p {
+  margin: 0 0 20px;
+  color: #666666;
+  font-size: 15px;
+}
+
+.retry-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ff4500;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.retry-button:hover {
+  background-color: #e63e00;
+}
+
+.retry-button:active {
+  transform: scale(0.98);
+}

@@ -1,6 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
+  fetchPosts,
   selectPosts,
   selectPostsLoading,
   selectPostsError,
@@ -10,9 +11,13 @@ import {
 } from "../../features/posts/postsSlice";
 
 import Post from "../Post/Post";
+import Error from "../Error/Error";
+
 import "./PostList.css";
 
 function PostList() {
+  const dispatch = useDispatch();
+
   const posts = useSelector(selectPosts);
   const loading = useSelector(selectPostsLoading);
   const error = useSelector(selectPostsError);
@@ -32,27 +37,28 @@ function PostList() {
       return post.score >= 1000;
     }
 
-    // Topics: show posts from the selected subreddit
+    // Topics
     return post.subreddit === selectedSubreddit;
   });
-  // 2. Filter the remaining posts by search term
+
+  // 2. Filter by search term
   const filteredPosts = subredditPosts.filter((post) =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // 3. Sort the remaining posts
+  // 3. Sort posts
   const sortedPosts = [...filteredPosts].sort((a, b) => {
-    // New: newest posts first
+    // New
     if (sortType === "new") {
       return new Date(b.createdAt) - new Date(a.createdAt);
     }
 
-    // Top: highest score first
+    // Top
     if (sortType === "top") {
       return b.score - a.score;
     }
 
-    // Hot: score + comments
+    // Hot
     return b.score + b.comments - (a.score + a.comments);
   });
 
@@ -61,12 +67,17 @@ function PostList() {
     return <p>Loading posts...</p>;
   }
 
-  // Error state
+  // Recoverable error state
   if (error) {
-    return <p>Something went wrong: {error}</p>;
+    return (
+      <Error
+        message={error}
+        onRetry={() => dispatch(fetchPosts(selectedSubreddit))}
+      />
+    );
   }
 
-  // No posts found
+  // No results
   if (sortedPosts.length === 0) {
     return <p>No posts found.</p>;
   }
