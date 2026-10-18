@@ -1,10 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import "./Post.css";
 
-function Post({ subreddit, time, title, score, comments }) {
+function Post({ id, subreddit, time, title, score, comments }) {
+  const navigate = useNavigate();
+
+  const handlePostClick = () => {
+    navigate(`/post/${id}`);
+  };
+
   return (
-    <article className="post-card">
+    <article className="post-card" onClick={handlePostClick}>
       <div className="post-meta">
         <span className="subreddit">🔴 r/{subreddit}</span>
+
         <span>• {time}</span>
       </div>
 
