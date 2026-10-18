@@ -1,11 +1,14 @@
+import { useSelector } from "react-redux";
+import { selectPosts } from "../../features/posts/postsSlice";
 import Post from "../Post/Post";
-import { postsData } from "../../data/postsData";
 import "./PostList.css";
 
 function PostList() {
+  const posts = useSelector(selectPosts);
+
   return (
     <div className="post-list">
-      {postsData.map((post) => (
+      {posts.map((post) => (
         <Post
           key={post.id}
           subreddit={post.subreddit}
