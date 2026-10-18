@@ -15,6 +15,7 @@ const initialState = {
   error: null,
   selectedSubreddit: "home",
   searchTerm: "",
+  sortType: "hot",
 };
 const postsSlice = createSlice({
   name: "posts",
@@ -26,6 +27,9 @@ const postsSlice = createSlice({
     },
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
+    },
+    setSortType: (state, action) => {
+      state.sortType = action.payload;
     },
   },
 
@@ -45,7 +49,8 @@ const postsSlice = createSlice({
       });
   },
 });
-export const { setSelectedSubreddit, setSearchTerm } = postsSlice.actions;
+export const { setSelectedSubreddit, setSearchTerm, setSortType } =
+  postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
 export const selectPostsLoading = (state) => state.posts.loading;
@@ -53,5 +58,7 @@ export const selectPostsError = (state) => state.posts.error;
 export const selectSelectedSubreddit = (state) => state.posts.selectedSubreddit;
 //search
 export const selectSearchTerm = (state) => state.posts.searchTerm;
+//sort
+export const selectSortType = (state) => state.posts.sortType;
 
 export default postsSlice.reducer;

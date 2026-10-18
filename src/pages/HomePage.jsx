@@ -1,12 +1,18 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./HomePage.css";
 import PostList from "../components/PostList/PostList";
-import { fetchPosts } from "../features/posts/postsSlice";
+
+import {
+  fetchPosts,
+  setSortType,
+  selectSortType,
+} from "../features/posts/postsSlice";
 
 function HomePage() {
   const dispatch = useDispatch();
+  const sortType = useSelector(selectSortType);
 
   useEffect(() => {
     dispatch(fetchPosts("popular"));
@@ -21,9 +27,32 @@ function HomePage() {
         </div>
 
         <div className="sort-tabs">
-          <button className="sort-button active">🔥 Hot</button>
-          <button className="sort-button">✨ New</button>
-          <button className="sort-button">📊 Top</button>
+          <button
+            className={
+              sortType === "hot" ? "sort-button active" : "sort-button"
+            }
+            onClick={() => dispatch(setSortType("hot"))}
+          >
+            🔥 Hot
+          </button>
+
+          <button
+            className={
+              sortType === "new" ? "sort-button active" : "sort-button"
+            }
+            onClick={() => dispatch(setSortType("new"))}
+          >
+            ✨ New
+          </button>
+
+          <button
+            className={
+              sortType === "top" ? "sort-button active" : "sort-button"
+            }
+            onClick={() => dispatch(setSortType("top"))}
+          >
+            📊 Top
+          </button>
         </div>
 
         <PostList />
