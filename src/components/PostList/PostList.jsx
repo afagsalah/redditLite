@@ -6,37 +6,53 @@ import {
   selectPostsError,
   selectSearchTerm,
   selectSortType,
+  selectSelectedSubreddit,
 } from "../../features/posts/postsSlice";
 
 import Post from "../Post/Post";
 import "./PostList.css";
 
 function PostList() {
-  // Get data from Redux
   const posts = useSelector(selectPosts);
   const loading = useSelector(selectPostsLoading);
   const error = useSelector(selectPostsError);
   const searchTerm = useSelector(selectSearchTerm);
   const sortType = useSelector(selectSortType);
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
 
-  // 1. Filter posts based on the search term
-  const filteredPosts = posts.filter((post) =>
+  // 1. Filter posts by selected subreddit
+  const subredditPosts = posts.filter((post) => {
+    // Home: show all posts
+    if (selectedSubreddit === "home") {
+      return true;
+    }
+
+    // Popular: show posts with at least 1000 points
+    if (selectedSubreddit === "popular") {
+      return post.score >= 1000;
+    }
+
+    // Topics: show posts from the selected subreddit
+    return post.subreddit === selectedSubreddit;
+  });
+  // 2. Filter the remaining posts by search term
+  const filteredPosts = subredditPosts.filter((post) =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  // 2. Sort the filtered posts
+  // 3. Sort the remaining posts
   const sortedPosts = [...filteredPosts].sort((a, b) => {
-    // NEW: newest post first
+    // New: newest posts first
     if (sortType === "new") {
       return new Date(b.createdAt) - new Date(a.createdAt);
     }
 
-    // TOP: highest score first
+    // Top: highest score first
     if (sortType === "top") {
       return b.score - a.score;
     }
 
-    // HOT: combination of score and comments
+    // Hot: score + comments
     return b.score + b.comments - (a.score + a.comments);
   });
 
@@ -50,7 +66,7 @@ function PostList() {
     return <p>Something went wrong: {error}</p>;
   }
 
-  // No search results
+  // No posts found
   if (sortedPosts.length === 0) {
     return <p>No posts found.</p>;
   }
