@@ -62,3 +62,249 @@
     padding: 10px;
   }
 }
+/* =========================
+   DARK MODE
+   ========================= */
+
+.dark-mode {
+  min-height: 100vh;
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+/* Main layout */
+.dark-mode .app-layout {
+  background-color: #121212;
+}
+
+/* Header */
+.dark-mode .header {
+  background-color: #1e1e1e;
+  border-bottom-color: #333333;
+}
+
+.dark-mode .logo h1 {
+  color: #f1f1f1;
+}
+
+/* Search */
+.dark-mode .search input {
+  background-color: #2a2a2a;
+  border-color: #444444;
+  color: #f1f1f1;
+}
+
+.dark-mode .search input::placeholder {
+  color: #aaaaaa;
+}
+
+.dark-mode .search button {
+  background-color: #2a2a2a;
+  border-color: #444444;
+  color: #f1f1f1;
+}
+
+.dark-mode .theme-button {
+  color: #f1f1f1;
+}
+
+/* Left sidebar */
+.dark-mode .sidebar {
+  background-color: #1e1e1e;
+  border-right-color: #333333;
+}
+
+.dark-mode .sidebar-title {
+  color: #aaaaaa;
+}
+
+.dark-mode .sidebar-item {
+  color: #dddddd;
+}
+
+.dark-mode .sidebar-item:hover {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .sidebar-item.active {
+  background-color: #3a241c;
+  color: #ff7043;
+}
+
+/* Home page */
+.dark-mode .home-page {
+  background-color: #121212;
+}
+
+.dark-mode .feed-heading h1 {
+  color: #f1f1f1;
+}
+
+.dark-mode .feed-heading p {
+  color: #aaaaaa;
+}
+
+/* Sorting buttons */
+.dark-mode .sort-button {
+  background-color: #1e1e1e;
+  border-color: #333333;
+  color: #dddddd;
+}
+
+.dark-mode .sort-button:hover {
+  background-color: #2a2a2a;
+}
+
+.dark-mode .sort-button.active {
+  background-color: #3a241c;
+  border-color: #3a241c;
+  color: #ff7043;
+}
+
+/* Post cards */
+.dark-mode .post-card {
+  background-color: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark-mode .post-title {
+  color: #f1f1f1;
+}
+
+.dark-mode .post-meta {
+  color: #aaaaaa;
+}
+
+.dark-mode .subreddit {
+  color: #eeeeee;
+}
+
+.dark-mode .post-image {
+  background-color: #2a2a2a;
+  color: #aaaaaa;
+}
+
+/* Post buttons */
+.dark-mode .vote-actions,
+.dark-mode .action-button {
+  background-color: #2a2a2a;
+  color: #eeeeee;
+}
+
+.dark-mode .action-button:hover {
+  background-color: #363636;
+}
+
+/* Right sidebar */
+.dark-mode .right-sidebar {
+  background-color: #121212;
+}
+
+.dark-mode .right-card {
+  background-color: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark-mode .right-card h3 {
+  color: #f1f1f1;
+}
+
+.dark-mode .trend-info strong {
+  color: #eeeeee;
+}
+
+.dark-mode .trend-info span,
+.dark-mode .about-card p {
+  color: #aaaaaa;
+}
+
+.dark-mode .trending-item {
+  border-bottom-color: #333333;
+}
+
+.dark-mode .trend-number {
+  background-color: #2a2a2a;
+  color: #eeeeee;
+}
+
+/* Post details page */
+.dark-mode .post-page {
+  background-color: #121212;
+}
+
+.dark-mode .post-page-container {
+  background-color: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark-mode .post-page-title {
+  color: #f1f1f1;
+}
+
+.dark-mode .post-page-meta {
+  color: #aaaaaa;
+}
+
+.dark-mode .post-page-subreddit {
+  color: #eeeeee;
+}
+
+.dark-mode .post-page-image {
+  background-color: #2a2a2a;
+  color: #aaaaaa;
+}
+
+.dark-mode .post-page-actions,
+.dark-mode .comments-section {
+  border-color: #333333;
+}
+
+.dark-mode .post-page-votes,
+.dark-mode .post-page-action-button,
+.dark-mode .back-button {
+  background-color: #2a2a2a;
+  color: #eeeeee;
+}
+
+.dark-mode .post-page-action-button:hover,
+.dark-mode .back-button:hover {
+  background-color: #363636;
+}
+
+/* Comments */
+.dark-mode .comments-section h2 {
+  color: #f1f1f1;
+}
+
+.dark-mode .comment-card {
+  border-bottom-color: #333333;
+}
+
+.dark-mode .comment-meta strong,
+.dark-mode .comment-body {
+  color: #dddddd;
+}
+
+.dark-mode .comment-meta span,
+.dark-mode .no-comments {
+  color: #aaaaaa;
+}
+
+/* Loading */
+.dark-mode .loading-container p {
+  color: #bbbbbb;
+}
+
+/* Error */
+.dark-mode .error-container {
+  background-color: #1e1e1e;
+  border-color: #333333;
+}
+
+.dark-mode .error-container h2 {
+  color: #f1f1f1;
+}
+
+.dark-mode .error-container p {
+  color: #bbbbbb;
+}

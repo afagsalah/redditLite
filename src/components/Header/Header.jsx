@@ -7,7 +7,7 @@ import {
 
 import "./Header.css";
 
-function Header() {
+function Header({ darkMode, toggleDarkMode }) {
   const dispatch = useDispatch();
   const searchTerm = useSelector(selectSearchTerm);
 
@@ -33,7 +33,13 @@ function Header() {
         <button>🔍</button>
       </div>
 
-      <button className="theme-button">🌙</button>
+      <button
+        className="theme-button"
+        onClick={toggleDarkMode}
+        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {darkMode ? "☀️" : "🌙"}
+      </button>
     </header>
   );
 }
