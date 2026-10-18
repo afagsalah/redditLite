@@ -1,32 +1,24 @@
 const LEMMY_BASE_URL = "https://lemmy.world";
 
-export const getPosts = async (community = "home") => {
+export const getPosts = async (community = "home", sort = "Hot") => {
   let url;
 
   if (community === "home" || community === "popular") {
-    url = `${LEMMY_BASE_URL}/api/v3/post/list?sort=Hot&limit=20`;
+    url = `${LEMMY_BASE_URL}/api/v3/post/list` + `?sort=${sort}&limit=20`;
   } else {
     url =
       `${LEMMY_BASE_URL}/api/v3/post/list` +
       `?community_name=${encodeURIComponent(community)}` +
-      `&sort=Hot&limit=20`;
+      `&sort=${sort}&limit=20`;
   }
 
-  console.log("Requested community:", community);
-  console.log("Request URL:", url);
-
   const response = await fetch(url);
-
-  console.log("Status:", response.status);
-  console.log("Status text:", response.statusText);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch Lemmy posts (${response.status})`);
   }
 
   const data = await response.json();
-
-  console.log("Number of posts:", data.posts.length);
 
   return data.posts.map((item) => ({
     id: item.post.id,

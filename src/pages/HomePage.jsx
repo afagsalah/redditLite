@@ -8,15 +8,33 @@ import {
   fetchPosts,
   setSortType,
   selectSortType,
+  selectSelectedSubreddit,
 } from "../features/posts/postsSlice";
-import { getPosts } from "../api/lemmyApi";
+
 function HomePage() {
   const dispatch = useDispatch();
+
   const sortType = useSelector(selectSortType);
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
+
+  const sortMap = {
+    hot: "Hot",
+    new: "New",
+    top: "TopDay",
+  };
 
   useEffect(() => {
-    dispatch(fetchPosts("popular"));
-  }, [dispatch]);
+    dispatch(
+      fetchPosts({
+        community: selectedSubreddit,
+        sort: sortMap[sortType],
+      }),
+    );
+  }, [dispatch, selectedSubreddit, sortType]);
+
+  const handleSortChange = (newSortType) => {
+    dispatch(setSortType(newSortType));
+  };
 
   return (
     <main className="home-page">
@@ -31,7 +49,7 @@ function HomePage() {
             className={
               sortType === "hot" ? "sort-button active" : "sort-button"
             }
-            onClick={() => dispatch(setSortType("hot"))}
+            onClick={() => handleSortChange("hot")}
           >
             🔥 Hot
           </button>
@@ -40,7 +58,7 @@ function HomePage() {
             className={
               sortType === "new" ? "sort-button active" : "sort-button"
             }
-            onClick={() => dispatch(setSortType("new"))}
+            onClick={() => handleSortChange("new")}
           >
             ✨ New
           </button>
@@ -49,7 +67,7 @@ function HomePage() {
             className={
               sortType === "top" ? "sort-button active" : "sort-button"
             }
-            onClick={() => dispatch(setSortType("top"))}
+            onClick={() => handleSortChange("top")}
           >
             📊 Top
           </button>

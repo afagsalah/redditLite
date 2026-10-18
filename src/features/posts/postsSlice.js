@@ -3,9 +3,8 @@ import { postsData } from "../../data/postsData";
 import { getPosts } from "../../api/lemmyApi";
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
-  async (subreddit = "popular") => {
-    const posts = await getPosts(subreddit);
-    return posts;
+  async ({ community = "home", sort = "Hot" }) => {
+    return await getPosts(community, sort);
   },
 );
 
@@ -73,12 +72,18 @@ export const {
 } = postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
-export const selectPostsLoading = (state) => state.posts.loading;
-export const selectPostsError = (state) => state.posts.error;
-export const selectSelectedSubreddit = (state) => state.posts.selectedSubreddit;
-//search
-export const selectSearchTerm = (state) => state.posts.searchTerm;
-//sort
-export const selectSortType = (state) => state.posts.sortType;
+
+export const selectLoading = (state) => state.posts.loading;
+
+export const selectError = (state) => state.posts.error;
+
+export const selectSelectedSubreddit = (state) =>
+  state.posts.selectedSubreddit;
+
+export const selectSearchTerm = (state) =>
+  state.posts.searchTerm;
+
+export const selectSortType = (state) =>
+  state.posts.sortType;
 
 export default postsSlice.reducer;

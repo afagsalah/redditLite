@@ -14,7 +14,6 @@ function Sidebar() {
 
   const handleSubredditClick = (subreddit) => {
     dispatch(setSelectedSubreddit(subreddit));
-    dispatch(fetchPosts(subreddit));
   };
 
   return (
