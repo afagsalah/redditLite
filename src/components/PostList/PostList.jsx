@@ -9,10 +9,9 @@ import {
   selectSortType,
   selectSelectedSubreddit,
 } from "../../features/posts/postsSlice";
-
 import Post from "../Post/Post";
 import Error from "../Error/Error";
-
+import Loading from "../Loading/Loading";
 import "./PostList.css";
 
 function PostList() {
@@ -64,9 +63,8 @@ function PostList() {
 
   // Loading state
   if (loading) {
-    return <p>Loading posts...</p>;
+    return <Loading />;
   }
-
   // Recoverable error state
   if (error) {
     return (

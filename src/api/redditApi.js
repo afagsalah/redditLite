@@ -18,3 +18,13 @@ export const getPosts = async (subreddit = "popular") => {
 
   return postsData;
 };
+
+/*import { postsData } from "../data/postsData";
+
+export const getPosts = async (subreddit = "popular") => {
+  console.log("Requested subreddit:", subreddit);
+
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  return postsData;
+};*/
