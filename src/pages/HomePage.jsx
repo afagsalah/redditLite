@@ -9,7 +9,7 @@ import {
   setSortType,
   selectSortType,
 } from "../features/posts/postsSlice";
-
+import { getPosts } from "../api/lemmyApi";
 function HomePage() {
   const dispatch = useDispatch();
   const sortType = useSelector(selectSortType);

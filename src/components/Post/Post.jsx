@@ -4,7 +4,7 @@ import { upvotePost, downvotePost } from "../../features/posts/postsSlice";
 
 import "./Post.css";
 
-function Post({ id, subreddit, time, title, score, comments }) {
+function Post({ id, subreddit, time, title, score, comments, image }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function Post({ id, subreddit, time, title, score, comments }) {
 
       <h2 className="post-title">{title}</h2>
 
-      <div className="post-image">Post Image</div>
+      {image && <img className="post-image" src={image} alt={title} />}
 
       <div className="post-actions">
         <div className="vote-actions">

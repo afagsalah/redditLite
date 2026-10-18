@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { postsData } from "../../data/postsData";
-import { getPosts } from "../../api/redditApi";
+import { getPosts } from "../../api/lemmyApi";
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
   async (subreddit = "popular") => {

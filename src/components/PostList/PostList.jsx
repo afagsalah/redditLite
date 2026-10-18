@@ -92,6 +92,7 @@ function PostList() {
           title={post.title}
           score={post.score}
           comments={post.comments}
+          image={post.image}
         />
       ))}
     </div>
