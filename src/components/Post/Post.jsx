@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { upvotePost, downvotePost } from "../../features/posts/postsSlice";
+
 import "./Post.css";
 
 function Post({ id, subreddit, time, title, score, comments }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handlePostClick = () => {
@@ -22,9 +26,25 @@ function Post({ id, subreddit, time, title, score, comments }) {
 
       <div className="post-actions">
         <div className="vote-actions">
-          <button className="upvote">↑</button>
+          <button
+            className="upvote"
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(upvotePost(id));
+            }}
+          >
+            ↑
+          </button>
           <span>{score}</span>
-          <button className="downvote">↓</button>
+          <button
+            className="downvote"
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(downvotePost(id));
+            }}
+          >
+            ↓
+          </button>
         </div>
 
         <button className="action-button">💬 {comments} comments</button>

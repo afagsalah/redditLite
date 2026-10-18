@@ -1,23 +1,39 @@
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { commentsData } from "../data/commentsData";
-import { selectPosts } from "../features/posts/postsSlice";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  selectPosts,
+  upvotePost,
+  downvotePost,
+} from "../features/posts/postsSlice";
+
+import { selectComments } from "../features/comments/commentsSlice";
+
 import "./PostPage.css";
 
 function PostPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const posts = useSelector(selectPosts);
+  const comments = useSelector(selectComments);
 
   const post = posts.find((post) => post.id === Number(id));
-  const postComments = commentsData.filter(
+
+  const postComments = comments.filter(
     (comment) => comment.postId === Number(id),
   );
+
   if (!post) {
     return (
       <main className="post-page">
         <div className="post-page-container post-not-found">
           <h1>Post not found</h1>
-          <p>The post you are looking for does not exist.</p>
+
+          <button className="back-button" onClick={() => navigate("/")}>
+            ← Back to posts
+          </button>
         </div>
       </main>
     );
@@ -26,6 +42,10 @@ function PostPage() {
   return (
     <main className="post-page">
       <div className="post-page-container">
+        <button className="back-button" onClick={() => navigate(-1)}>
+          ← Back to posts
+        </button>
+
         <div className="post-page-meta">
           <span className="post-page-subreddit">🔴 r/{post.subreddit}</span>
 
@@ -38,9 +58,21 @@ function PostPage() {
 
         <div className="post-page-actions">
           <div className="post-page-votes">
-            <button className="upvote">↑</button>
+            <button
+              className="upvote"
+              onClick={() => dispatch(upvotePost(post.id))}
+            >
+              ↑
+            </button>
+
             <span>{post.score}</span>
-            <button className="downvote">↓</button>
+
+            <button
+              className="downvote"
+              onClick={() => dispatch(downvotePost(post.id))}
+            >
+              ↓
+            </button>
           </div>
 
           <button className="post-page-action-button">
@@ -49,6 +81,7 @@ function PostPage() {
 
           <button className="post-page-action-button">↗ Share</button>
         </div>
+
         <section className="comments-section">
           <h2>Comments</h2>
 
@@ -59,6 +92,7 @@ function PostPage() {
               <div className="comment-card" key={comment.id}>
                 <div className="comment-meta">
                   <strong>u/{comment.author}</strong>
+
                   <span>• {comment.time}</span>
                 </div>
 

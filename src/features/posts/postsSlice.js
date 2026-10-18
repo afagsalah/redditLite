@@ -31,6 +31,21 @@ const postsSlice = createSlice({
     setSortType: (state, action) => {
       state.sortType = action.payload;
     },
+    upvotePost: (state, action) => {
+      const post = state.posts.find((post) => post.id === action.payload);
+
+      if (post) {
+        post.score += 1;
+      }
+    },
+
+    downvotePost: (state, action) => {
+      const post = state.posts.find((post) => post.id === action.payload);
+
+      if (post) {
+        post.score -= 1;
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -49,8 +64,13 @@ const postsSlice = createSlice({
       });
   },
 });
-export const { setSelectedSubreddit, setSearchTerm, setSortType } =
-  postsSlice.actions;
+export const {
+  setSelectedSubreddit,
+  setSearchTerm,
+  setSortType,
+  upvotePost,
+  downvotePost,
+} = postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
 export const selectPostsLoading = (state) => state.posts.loading;
