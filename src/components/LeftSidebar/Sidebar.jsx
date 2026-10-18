@@ -1,60 +1,111 @@
-import "./sidebar.css";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  fetchPosts,
+  setSelectedSubreddit,
+  selectSelectedSubreddit,
+} from "../../features/posts/postsSlice";
+
+import "./Sidebar.css";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
+
+  const handleSubredditClick = (subreddit) => {
+    dispatch(setSelectedSubreddit(subreddit));
+    dispatch(fetchPosts(subreddit));
+  };
+
   return (
     <aside className="sidebar">
+      {/* DISCOVER */}
       <h3 className="sidebar-title">DISCOVER</h3>
 
-      <nav className="sidebar-menu">
-        <button className="sidebar-item active">
-          <span>🏠</span>
-          Home
+      <div className="sidebar-menu">
+        {/* Home */}
+        <button
+          className={
+            selectedSubreddit === "home"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("home")}
+        >
+          🏠 Home
         </button>
 
-        <button className="sidebar-item">
-          <span>🔥</span>
-          Popular
+        {/* Popular */}
+        <button
+          className={
+            selectedSubreddit === "popular"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("popular")}
+        >
+          🔥 Popular
         </button>
 
-        <button className="sidebar-item">
-          <span>✨</span>
-          New
+        {/* New */}
+        <button
+          className={
+            selectedSubreddit === "new" ? "sidebar-item active" : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("new")}
+        >
+          ✨ New
         </button>
-      </nav>
+      </div>
 
+      {/* TOPICS */}
       <h3 className="sidebar-title topics-title">TOPICS</h3>
 
-      <nav className="sidebar-menu">
-        <button className="sidebar-item">
-          <span>💻</span>
-          Technology
+      <div className="sidebar-menu">
+        <button
+          className={
+            selectedSubreddit === "technology"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("technology")}
+        >
+          💻 Technology
         </button>
 
-        <button className="sidebar-item">
-          <span>{"</>"}</span>
-          Programming
+        <button
+          className={
+            selectedSubreddit === "programming"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("programming")}
+        >
+          👨‍💻 Programming
         </button>
 
-        <button className="sidebar-item">
-          <span>🔬</span>
-          Science
+        <button
+          className={
+            selectedSubreddit === "science"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("science")}
+        >
+          🔬 Science
         </button>
 
-        <button className="sidebar-item">
-          <span>🎮</span>
-          Gaming
+        <button
+          className={
+            selectedSubreddit === "gaming"
+              ? "sidebar-item active"
+              : "sidebar-item"
+          }
+          onClick={() => handleSubredditClick("gaming")}
+        >
+          🎮 Gaming
         </button>
-
-        <button className="sidebar-item">
-          <span>🎬</span>
-          Movies
-        </button>
-
-        <button className="sidebar-item">
-          <span>🏆</span>
-          Sports
-        </button>
-      </nav>
+      </div>
     </aside>
   );
 }

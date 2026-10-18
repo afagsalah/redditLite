@@ -1,7 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import "./HomePage.css";
 import PostList from "../components/PostList/PostList";
+import { fetchPosts } from "../features/posts/postsSlice";
 
 function HomePage() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts("popular"));
+  }, [dispatch]);
+
   return (
     <main className="home-page">
       <div className="feed-container">
