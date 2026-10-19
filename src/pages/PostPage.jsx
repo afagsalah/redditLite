@@ -1,63 +1,115 @@
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  selectPosts,
-  upvotePost,
-  downvotePost,
-} from "../features/posts/postsSlice";
+import { upvotePost, downvotePost } from "../features/posts/postsSlice";
 
-import { selectComments } from "../features/comments/commentsSlice";
+import {
+  fetchComments,
+  selectComments,
+  selectCommentsLoading,
+  selectCommentsError,
+} from "../features/comments/commentsSlice";
+
+import { getPost, getComments } from "../api/lemmyApi";
 
 import "./PostPage.css";
 
 function PostPage() {
   const { id } = useParams();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const posts = useSelector(selectPosts);
+  const postId = Number(id);
+
   const comments = useSelector(selectComments);
+  const commentsLoading = useSelector(selectCommentsLoading);
+  const commentsError = useSelector(selectCommentsError);
 
-  const post = posts.find((post) => post.id === Number(id));
+  const [post, setPost] = useState(null);
+  const [postLoading, setPostLoading] = useState(true);
+  const [postError, setPostError] = useState(null);
 
-  const postComments = comments.filter(
-    (comment) => comment.postId === Number(id),
-  );
+  useEffect(() => {
+    const loadPost = async () => {
+      try {
+        setPostLoading(true);
+        setPostError(null);
+
+        const postData = await getPost(postId);
+
+        setPost(postData);
+      } catch (error) {
+        setPostError(error.message);
+      } finally {
+        setPostLoading(false);
+      }
+    };
+
+    loadPost();
+
+    dispatch(fetchComments(postId));
+  }, [dispatch, postId]);
+
+  if (postLoading) {
+    return (
+      <main className="post-page">
+        <p>Loading post...</p>
+      </main>
+    );
+  }
+
+  if (postError) {
+    return (
+      <main className="post-page">
+        <button className="back-button" onClick={() => navigate("/")}>
+          <span className="back-icon">←</span>
+          Back to posts
+        </button>
+
+        <p className="post-error">{postError}</p>
+      </main>
+    );
+  }
 
   if (!post) {
     return (
       <main className="post-page">
-        <div className="post-page-container post-not-found">
-          <h1>Post not found</h1>
-
-          <button className="back-button" onClick={() => navigate("/")}>
-            ← Back to posts
-          </button>
-        </div>
+        <p>Post not found.</p>
       </main>
     );
   }
 
   return (
     <main className="post-page">
-      <div className="post-page-container">
-        <button className="back-button" onClick={() => navigate(-1)}>
-          ← Back to posts
-        </button>
+      <button className="back-button" onClick={() => navigate("/")}>
+        ← Back to posts
+      </button>
 
-        <div className="post-page-meta">
-          <span className="post-page-subreddit">🔴 r/{post.subreddit}</span>
+      <article className="post-detail-card">
+        <div className="post-meta">
+          <span className="subreddit">🔴 !{post.subreddit}</span>
 
           <span>• {post.time}</span>
         </div>
 
-        <h1 className="post-page-title">{post.title}</h1>
+        <h1 className="post-detail-title">{post.title}</h1>
 
-        <div className="post-page-image">Post Image</div>
+        {post.body && <p className="post-body">{post.body}</p>}
 
-        <div className="post-page-actions">
-          <div className="post-page-votes">
+        {post.image && (
+          <div className="post-detail-media">
+            <img
+              className="post-detail-image"
+              src={post.image}
+              alt={post.title}
+            />
+          </div>
+        )}
+
+        <div className="post-actions">
+          <div className="vote-actions">
             <button
               className="upvote"
               onClick={() => dispatch(upvotePost(post.id))}
@@ -75,33 +127,48 @@ function PostPage() {
             </button>
           </div>
 
-          <button className="post-page-action-button">
-            💬 {post.comments} comments
-          </button>
+          <span className="action-button">💬 {post.comments} comments</span>
 
-          <button className="post-page-action-button">↗ Share</button>
-        </div>
-
-        <section className="comments-section">
-          <h2>Comments</h2>
-
-          {postComments.length === 0 ? (
-            <p className="no-comments">No comments yet.</p>
-          ) : (
-            postComments.map((comment) => (
-              <div className="comment-card" key={comment.id}>
-                <div className="comment-meta">
-                  <strong>u/{comment.author}</strong>
-
-                  <span>• {comment.time}</span>
-                </div>
-
-                <p className="comment-body">{comment.body}</p>
-              </div>
-            ))
+          {post.url && (
+            <a
+              className="action-button"
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ↗ Open
+            </a>
           )}
-        </section>
-      </div>
+        </div>
+      </article>
+
+      <section className="comments-section">
+        <h2>Comments</h2>
+
+        {commentsLoading && <p>Loading comments...</p>}
+
+        {commentsError && <p className="comments-error">{commentsError}</p>}
+
+        {!commentsLoading && !commentsError && comments.length === 0 && (
+          <p>No comments yet.</p>
+        )}
+
+        {!commentsLoading &&
+          !commentsError &&
+          comments.map((comment) => (
+            <article className="comment-card" key={comment.id}>
+              <div className="comment-header">
+                <strong>{comment.author}</strong>
+
+                <span>{comment.time}</span>
+              </div>
+
+              <p>{comment.body}</p>
+
+              <span className="comment-score">↑ {comment.score}</span>
+            </article>
+          ))}
+      </section>
     </main>
   );
 }

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { postsData } from "../../data/postsData";
 import { getPosts } from "../../api/lemmyApi";
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
@@ -9,7 +8,7 @@ export const fetchPosts = createAsyncThunk(
 );
 
 const initialState = {
-  posts: postsData,
+  posts: [],
   loading: false,
   error: null,
   selectedSubreddit: "home",
@@ -77,13 +76,10 @@ export const selectLoading = (state) => state.posts.loading;
 
 export const selectError = (state) => state.posts.error;
 
-export const selectSelectedSubreddit = (state) =>
-  state.posts.selectedSubreddit;
+export const selectSelectedSubreddit = (state) => state.posts.selectedSubreddit;
 
-export const selectSearchTerm = (state) =>
-  state.posts.searchTerm;
+export const selectSearchTerm = (state) => state.posts.searchTerm;
 
-export const selectSortType = (state) =>
-  state.posts.sortType;
+export const selectSortType = (state) => state.posts.sortType;
 
 export default postsSlice.reducer;

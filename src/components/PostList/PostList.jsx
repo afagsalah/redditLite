@@ -69,11 +69,13 @@ function PostList() {
           key={post.id}
           id={post.id}
           subreddit={post.subreddit}
+          author={post.author}
           time={post.time}
           title={post.title}
           score={post.score}
           comments={post.comments}
           image={post.image}
+          url={post.url}
         />
       ))}
     </div>

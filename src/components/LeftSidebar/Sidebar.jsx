@@ -45,16 +45,6 @@ function Sidebar() {
         >
           🔥 Popular
         </button>
-
-        {/* New */}
-        <button
-          className={
-            selectedSubreddit === "new" ? "sidebar-item active" : "sidebar-item"
-          }
-          onClick={() => handleSubredditClick("new")}
-        >
-          ✨ New
-        </button>
       </div>
 
       {/* TOPICS */}

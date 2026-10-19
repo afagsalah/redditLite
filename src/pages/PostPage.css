@@ -3,7 +3,77 @@
   padding: 32px;
   background-color: #f6f7f8;
 }
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 
+  margin-bottom: 18px;
+  padding: 8px 14px 8px 8px;
+
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.back-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  background-color: #f1f2f3;
+  border-radius: 50%;
+
+  font-size: 18px;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+}
+
+.back-button:hover .back-icon {
+  background-color: #e4e5e7;
+  transform: translateX(-2px);
+}
+
+.back-button:active .back-icon {
+  transform: translateX(-4px);
+}
+
+/* Dark mode */
+
+.dark-mode .back-button {
+  color: #f1f1f1;
+}
+
+.dark-mode .back-icon {
+  background-color: #333;
+}
+
+.dark-mode .back-button:hover {
+  background-color: #292929;
+}
+
+.dark-mode .back-button:hover .back-icon {
+  background-color: #444;
+}
 .post-page-container {
   width: 100%;
   max-width: 900px;
