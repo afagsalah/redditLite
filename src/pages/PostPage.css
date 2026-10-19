@@ -1,7 +1,19 @@
+.home-page {
+  height: 100%;
+  overflow-y: auto;
+  min-height: 0;
+}
+
 .post-page {
-  min-width: 0;
-  padding: 32px;
-  background-color: #f6f7f8;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.post-detail-card {
+  width: 100%;
+  box-sizing: border-box;
 }
 .back-button {
   display: inline-flex;

@@ -1,15 +1,25 @@
+/* =========================
+   ROOT / APP
+   ========================= */
+
 #root {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
-/*.app-layout {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr) 300px;
 
-  min-height: calc(100vh - 70px);
-  background-color: #f6f7f8;
+.app {
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
 }
-*/
+
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+
 .app-layout {
   display: grid;
 
@@ -19,32 +29,117 @@
     300px;
 
   width: 100%;
-  min-height: calc(100vh - 70px);
+
+  flex: 1;
+  min-height: 0;
+
+  overflow: hidden;
 
   background-color: #f6f7f8;
 }
-/*Tablet layout*/
+
+/* =========================
+   SIDEBAR WRAPPERS
+   ========================= */
+
+.desktop-sidebar {
+  height: 100%;
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+/* Mobile sidebar is hidden on desktop */
+.mobile-sidebar {
+  display: none;
+}
+
+/* =========================
+   TABLET LAYOUT
+   ========================= */
+
 @media (max-width: 1100px) {
   .app-layout {
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns:
+      200px
+      minmax(0, 1fr);
   }
 
   .right-sidebar {
     display: none;
   }
 }
-@media (max-width: 768px) {
+.mobile-overlay {
+  display: none;
+}
+/* =========================
+   MOBILE LAYOUT
+   ========================= */
+
+@media (max-width: 700px) {
   .app-layout {
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+
+    position: relative;
   }
 
-  .sidebar {
+  /* Hide normal desktop sidebar */
+  .desktop-sidebar {
     display: none;
   }
-}
-/*Mobile layout*/
 
-@media (max-width: 768px) {
+  /* Right sidebar remains hidden */
+  .right-sidebar {
+    display: none;
+  }
+  .mobile-overlay {
+    display: block;
+
+    position: absolute;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    z-index: 90;
+  }
+  /* Mobile sliding sidebar */
+  .mobile-sidebar {
+    display: block;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    background-color: #ffffff;
+
+    z-index: 100;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.2s ease;
+
+    box-shadow: 4px 0 14px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Sidebar visible after clicking ☰ */
+  .mobile-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .mobile-sidebar .sidebar {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+  }
+
   .home-page {
     padding: 20px 15px;
   }
@@ -62,22 +157,26 @@
     padding: 10px;
   }
 }
+
 /* =========================
    DARK MODE
    ========================= */
 
 .dark-mode {
-  min-height: 100vh;
+  height: 100vh;
+
   background-color: #121212;
   color: #f1f1f1;
 }
 
 /* Main layout */
+
 .dark-mode .app-layout {
   background-color: #121212;
 }
 
 /* Header */
+
 .dark-mode .header {
   background-color: #1e1e1e;
   border-bottom-color: #333333;
@@ -88,6 +187,7 @@
 }
 
 /* Search */
+
 .dark-mode .search input {
   background-color: #2a2a2a;
   border-color: #444444;
@@ -109,6 +209,7 @@
 }
 
 /* Left sidebar */
+
 .dark-mode .sidebar {
   background-color: #1e1e1e;
   border-right-color: #333333;
@@ -131,7 +232,16 @@
   color: #ff7043;
 }
 
+/* Mobile sidebar */
+
+.dark-mode .mobile-sidebar {
+  background-color: #1e1e1e;
+
+  box-shadow: 4px 0 14px rgba(0, 0, 0, 0.4);
+}
+
 /* Home page */
+
 .dark-mode .home-page {
   background-color: #121212;
 }
@@ -145,6 +255,7 @@
 }
 
 /* Sorting buttons */
+
 .dark-mode .sort-button {
   background-color: #1e1e1e;
   border-color: #333333;
@@ -162,6 +273,7 @@
 }
 
 /* Post cards */
+
 .dark-mode .post-card {
   background-color: #1e1e1e;
   border-color: #333333;
@@ -185,6 +297,7 @@
 }
 
 /* Post buttons */
+
 .dark-mode .vote-actions,
 .dark-mode .action-button {
   background-color: #2a2a2a;
@@ -196,6 +309,7 @@
 }
 
 /* Right sidebar */
+
 .dark-mode .right-sidebar {
   background-color: #121212;
 }
@@ -228,6 +342,7 @@
 }
 
 /* Post details page */
+
 .dark-mode .post-page {
   background-color: #121212;
 }
@@ -272,6 +387,7 @@
 }
 
 /* Comments */
+
 .dark-mode .comments-section h2 {
   color: #f1f1f1;
 }
@@ -291,11 +407,13 @@
 }
 
 /* Loading */
+
 .dark-mode .loading-container p {
   color: #bbbbbb;
 }
 
 /* Error */
+
 .dark-mode .error-container {
   background-color: #1e1e1e;
   border-color: #333333;

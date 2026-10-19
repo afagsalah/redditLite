@@ -7,17 +7,27 @@
 
   background-color: white;
   border-bottom: 1px solid #ddd;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
+.logo-image {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+}
 .logo h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .search {
@@ -48,4 +58,19 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
+}
+.mobile-menu-button {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  .mobile-menu-button {
+    display: block;
+  }
 }

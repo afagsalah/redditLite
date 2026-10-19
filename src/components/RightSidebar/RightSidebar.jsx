@@ -6,7 +6,19 @@ function RightSidebar() {
   const posts = useSelector(selectPosts);
 
   // Get the 3 highest-scoring posts from the current feed
-  const trendingPosts = [...posts]
+  const trendingPosts = Object.values(
+    posts.reduce((topPosts, post) => {
+      const community = post.subreddit;
+
+      // Keep only the highest-scoring post
+      // from each community
+      if (!topPosts[community] || post.score > topPosts[community].score) {
+        topPosts[community] = post;
+      }
+
+      return topPosts;
+    }, {}),
+  )
     .sort((a, b) => b.score - a.score)
     .slice(0, 3);
 

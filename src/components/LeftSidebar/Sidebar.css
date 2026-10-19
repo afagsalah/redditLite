@@ -1,11 +1,12 @@
 .sidebar {
-  min-width: 0;
-  min-height: calc(100vh - 70px);
-  padding: 30px 20px;
-  background-color: #ffffff;
-  border-right: 1px solid #e5e5e5;
-}
+  height: 100%;
+  overflow-y: auto;
 
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+
+  align-self: start;
+}
 /* Section titles: DISCOVER, TOPICS */
 .sidebar-title {
   margin: 0 0 12px 12px;

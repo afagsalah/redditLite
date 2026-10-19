@@ -1,3 +1,7 @@
+/* =========================
+   POST CARD
+   ========================= */
+
 .post-card {
   background-color: #ffffff;
 
@@ -86,39 +90,89 @@
   margin: 4px 0 14px;
 
   color: #181c1f;
+
   font-size: 19px;
   font-weight: 600;
   line-height: 1.35;
 }
 
 /* =========================
-   MEDIA
+   IMAGE POSTS
    ========================= */
 
 .post-media {
-  width: 100%;
-  max-height: 520px;
+  width: fit-content;
+  max-width: 100%;
+  max-height: 500px;
+
+  margin: 12px auto 0;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   overflow: hidden;
 
-  background-color: #e5e1de;
-  border-radius: 14px;
+  border-radius: 12px;
+
+  background-color: #f2f2f2;
 }
 
 .post-image {
   display: block;
 
   width: auto;
-  height: auto;
-
   max-width: 100%;
-  max-height: 520px;
+
+  height: auto;
+  max-height: 500px;
 
   object-fit: contain;
+}
+
+/* =========================
+   LINK / ARTICLE POSTS
+   ========================= */
+
+.post-link-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.post-link-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-link-content .post-title {
+  margin-bottom: 6px;
+}
+
+.post-domain {
+  display: block;
+
+  color: #787c7e;
+
+  font-size: 12px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.post-thumbnail {
+  width: 120px;
+  height: 90px;
+
+  flex-shrink: 0;
+
+  object-fit: cover;
+
+  border: 1px solid #e2e4e7;
+  border-radius: 10px;
 }
 
 /* =========================
@@ -131,7 +185,13 @@
   gap: 8px;
 
   margin-top: 12px;
+
+  flex-wrap: wrap;
 }
+
+/* =========================
+   VOTING
+   ========================= */
 
 .vote-actions {
   display: flex;
@@ -150,9 +210,11 @@
   height: 36px;
 
   border: none;
+
   background: transparent;
 
   color: #333;
+
   font-size: 18px;
 
   cursor: pointer;
@@ -179,6 +241,10 @@
   font-weight: 700;
 }
 
+/* =========================
+   ACTION BUTTONS
+   ========================= */
+
 .post-action-button {
   height: 36px;
 
@@ -194,11 +260,13 @@
   background-color: #f1f2f3;
 
   color: #333;
+
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
 
   cursor: pointer;
+
   text-decoration: none;
 
   transition: background-color 0.15s ease;
@@ -236,6 +304,14 @@
   background-color: #111;
 }
 
+.dark-mode .post-domain {
+  color: #aaa;
+}
+
+.dark-mode .post-thumbnail {
+  border-color: #444;
+}
+
 .dark-mode .vote-actions,
 .dark-mode .post-action-button {
   background-color: #333;
@@ -249,6 +325,26 @@
 .dark-mode .vote-button:hover,
 .dark-mode .post-action-button:hover {
   background-color: #444;
+}
+
+/* =========================
+   TABLET
+   ========================= */
+
+@media (max-width: 900px) {
+  .post-card {
+    padding: 16px;
+  }
+
+  .post-media,
+  .post-image {
+    max-height: 450px;
+  }
+
+  .post-thumbnail {
+    width: 110px;
+    height: 82px;
+  }
 }
 
 /* =========================
@@ -267,7 +363,19 @@
 
   .post-media,
   .post-image {
-    max-height: 450px;
+    max-width: 100%;
+    max-height: 400px;
+  }
+
+  .post-link-content {
+    gap: 12px;
+  }
+
+  .post-thumbnail {
+    width: 90px;
+    height: 70px;
+
+    border-radius: 8px;
   }
 
   .post-actions {
@@ -280,5 +388,55 @@
 
   .post-link {
     display: none;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+  .post-card {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .community-icon {
+    width: 26px;
+    height: 26px;
+
+    font-size: 12px;
+  }
+
+  .post-title {
+    margin-bottom: 10px;
+
+    font-size: 16px;
+  }
+
+  .post-media,
+  .post-image {
+    max-height: 350px;
+  }
+
+  .post-thumbnail {
+    width: 80px;
+    height: 64px;
+  }
+
+  .vote-actions,
+  .vote-button,
+  .post-action-button {
+    height: 34px;
+  }
+
+  .vote-button {
+    width: 32px;
+  }
+
+  .post-action-button {
+    padding: 0 10px;
+
+    font-size: 12px;
   }
 }

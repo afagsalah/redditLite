@@ -6,8 +6,8 @@ import {
 } from "../../features/posts/postsSlice";
 
 import "./Header.css";
-
-function Header({ darkMode, toggleDarkMode }) {
+import logo from "../../assets/RedditLite Logo.png";
+function Header({ darkMode, toggleDarkMode, toggleMobileMenu }) {
   const dispatch = useDispatch();
   const searchTerm = useSelector(selectSearchTerm);
 
@@ -17,11 +17,17 @@ function Header({ darkMode, toggleDarkMode }) {
 
   return (
     <header className="header">
-      <div className="logo">
-        <span>🔴</span>
-        <h1>RedditLite</h1>
-      </div>
+      <button
+        className="mobile-menu-button"
+        onClick={toggleMobileMenu}
+        aria-label="Open navigation menu"
+      >
+        ☰
+      </button>
 
+      <div className="logo">
+        <img src={logo} alt="RedditLite" className="logo-image" />
+      </div>
       <div className="search">
         <input
           type="text"

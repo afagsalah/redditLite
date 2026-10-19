@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { upvotePost, downvotePost } from "../../features/posts/postsSlice";
 
 import "./Post.css";
@@ -31,13 +30,15 @@ function Post({
     try {
       await navigator.clipboard.writeText(postUrl);
     } catch {
-      // Ignore clipboard errors for now
+      // Ignore clipboard errors
     }
   };
 
+  // Check whether the original URL points directly to an image
+  const isImagePost = url && /\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i.test(url);
+
   return (
     <article className="post-card" onClick={handlePostClick}>
-      {/* Post information */}
       <div className="post-meta">
         <div className="community-icon">
           {subreddit?.charAt(0).toUpperCase()}
@@ -56,17 +57,37 @@ function Post({
         </div>
       </div>
 
-      {/* Title */}
-      <h2 className="post-title">{title}</h2>
+      {/* IMAGE POST */}
+      {isImagePost ? (
+        <>
+          <h2 className="post-title">{title}</h2>
 
-      {/* Image */}
-      {image && (
-        <div className="post-media">
-          <img className="post-image" src={image} alt={title} loading="lazy" />
+          {image && (
+            <div className="post-media">
+              <img
+                className="post-image"
+                src={image}
+                alt={title}
+                loading="lazy"
+              />
+            </div>
+          )}
+        </>
+      ) : (
+        /* LINK / ARTICLE POST */
+        <div className="post-link-content">
+          <div className="post-link-text">
+            <h2 className="post-title">{title}</h2>
+
+            {url && <span className="post-domain">{getDomain(url)}</span>}
+          </div>
+
+          {image && (
+            <img className="post-thumbnail" src={image} alt="" loading="lazy" />
+          )}
         </div>
       )}
 
-      {/* Actions */}
       <div className="post-actions">
         <div
           className="vote-actions"
@@ -119,6 +140,14 @@ function Post({
       </div>
     </article>
   );
+}
+
+function getDomain(url) {
+  try {
+    return new URL(url).hostname.replace("www.", "");
+  } catch {
+    return "";
+  }
 }
 
 export default Post;

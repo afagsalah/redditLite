@@ -13,9 +13,10 @@ import "./App.css";
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem("darkMode");
-
     return savedMode === "true";
   });
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode((previousMode) => {
@@ -27,12 +28,39 @@ function App() {
     });
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((previous) => !previous);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className={darkMode ? "app dark-mode" : "app"}>
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Header
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        toggleMobileMenu={toggleMobileMenu}
+      />
 
       <div className="app-layout">
-        <Sidebar />
+        {mobileMenuOpen && (
+          <div
+            className="mobile-overlay"
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+        )}
+        <div
+          className={mobileMenuOpen ? "mobile-sidebar open" : "mobile-sidebar"}
+        >
+          <Sidebar onNavigate={closeMobileMenu} />
+        </div>
+
+        <div className="desktop-sidebar">
+          <Sidebar />
+        </div>
 
         <Routes>
           <Route path="/" element={<HomePage />} />

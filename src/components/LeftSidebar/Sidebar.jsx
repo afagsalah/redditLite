@@ -1,21 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import {
-  fetchPosts,
   setSelectedSubreddit,
   selectSelectedSubreddit,
 } from "../../features/posts/postsSlice";
 
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ onNavigate }) {
   const dispatch = useDispatch();
-  const selectedSubreddit = useSelector(selectSelectedSubreddit);
+  const navigate = useNavigate();
 
+  const selectedSubreddit = useSelector(selectSelectedSubreddit);
   const handleSubredditClick = (subreddit) => {
     dispatch(setSelectedSubreddit(subreddit));
-  };
+    navigate("/");
 
+    if (onNavigate) {
+      onNavigate();
+    }
+  };
   return (
     <aside className="sidebar">
       {/* DISCOVER */}
