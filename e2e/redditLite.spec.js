@@ -136,7 +136,13 @@ test("user can open a post and return to the posts page", async ({ page }) => {
 
   await expect(page).toHaveURL("/");
 
-  await expect(page.getByRole("heading", { name: "Home" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Home",
+      level: 1,
+      exact: true,
+    }),
+  ).toBeVisible();
 });
 test("user can switch between dark and light mode", async ({ page }) => {
   await page.goto("/");
